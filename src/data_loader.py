@@ -93,8 +93,8 @@ class MKGDataset:
         num_relations = len(relation_file.readlines())
         relation_file.close()
         
-        triples_train = train_df.values.astype(np.int)
-        triples_val = val_df.values.astype(np.int)
-        triples_test = test_df.values.astype(np.int)
+        triples_train = train_df.values.astype(int)
+        triples_val = val_df.values.astype(int)
+        triples_test = test_df.values.astype(int)
         
         return torch.LongTensor(triples_train), torch.LongTensor(triples_val), torch.LongTensor(triples_test), num_entities, num_relations

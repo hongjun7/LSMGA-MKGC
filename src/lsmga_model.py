@@ -122,11 +122,10 @@ class LSMGA(nn.Module):
         pos_loss = self.define_loss([t, projected_t]) # norm(h + r - t) [batch_size, 1]
         neg_losses = self.define_loss([t, t_neg]) # norm(t_neg - t) [batch_size, num_neg]
 
-        
         # TransE
-        neg_loss = torch.mean(neg_losses, dim=-1) # [batch_size, 1]
+        neg_loss = torch.mean(neg_losses, dim=-1, keepdim=True)  # [batch_size, 1]
         
-        target = torch.tensor([-1], dtype=torch.long, device=self.device)
+        target = torch.tensor([-1], dtype=torch.long, device=self.device).expand_as(neg_loss)
         total_loss = self.criterion(pos_loss, neg_loss, target)
         
         return total_loss

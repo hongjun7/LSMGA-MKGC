@@ -80,7 +80,6 @@ class MGA(MessagePassing):
         message_all_head = message.transpose(0, 1).reshape(-1, self.d_v * self.n_heads) # [num_edges, d_v * n_heads]
         
         return message_all_head
-
     
     def compute_transfer(self, input_x, linear_transfer, output_dim, input_edge_kg_index):
 

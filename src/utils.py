@@ -76,15 +76,15 @@ def get_kg_edges_for_each(kg_dir, language):
                          header=None, names=['head', 'relation', 'tail'])
     
     #training data graph construction
-    sender_node_list = train_df['head'].values.astype(np.int).tolist()
-    sender_node_list += train_df['tail'].values.astype(np.int).tolist()
+    sender_node_list = train_df['head'].values.astype(int).tolist()
+    sender_node_list += train_df['tail'].values.astype(int).tolist()
     
-    receiver_node_list = train_df['tail'].values.astype(np.int).tolist() 
-    receiver_node_list += train_df['head'].values.astype(np.int).tolist()
+    receiver_node_list = train_df['tail'].values.astype(int).tolist()
+    receiver_node_list += train_df['head'].values.astype(int).tolist()
 
     
-    edge_relation_list = train_df['relation'].values.astype(np.int).tolist()
-    edge_relation_list += train_df['relation'].values.astype(np.int).tolist()
+    edge_relation_list = train_df['relation'].values.astype(int).tolist()
+    edge_relation_list += train_df['relation'].values.astype(int).tolist()
 
     edge_index = torch.LongTensor(np.vstack((sender_node_list, receiver_node_list))) # [2, num_edges]
     edge_relation = torch.LongTensor(np.asarray(edge_relation_list)) # [num_edges]
